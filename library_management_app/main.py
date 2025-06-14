@@ -112,6 +112,7 @@ def add_librarian(conn, ssn, name, email, password, salary):
                 (ssn, name, email, password, salary))
 
     cur.close()
+    return True
 
 def add_member(conn, email, password, name, card_number, address):
     #add member to database
@@ -131,6 +132,7 @@ def add_member(conn, email, password, name, card_number, address):
     
     conn.commit()
     cur.close()
+    return True
 
 
 
