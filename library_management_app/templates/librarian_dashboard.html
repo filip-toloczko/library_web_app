@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Librarian Dashboard{% endblock %}
+
+{% block content %}
+<div class="librarian-dashboard">
+    <h2>Welcome, {{ user_name }}!</h2>
+    <p>Librarian Dashboard</p>
+    
+    <div class="grid">
+        <div class="card">
+            <h3>Manage Documents</h3>
+
+            <div class="buttons">
+                <a href="{{ url_for('add_book_route') }}"><button>Add New Book</button></a>
+                <button>Update Document</button>
+                <button>Delete Document Copies</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>Manage Clients</h3>
+
+            <div class="buttons">
+                <button>Register New Client</button>
+                <button>Update Client Info</button>
+                <button>Delete Client</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>Search & Browse</h3>
+
+            <a href="{{ url_for('search') }}"><button>Search Documents</button></a>
+        </div>
+    </div>
+</div>
+<style>
+    .librarian-dashboard{
+        text-align: center;
+    }
+</style>
+{% endblock %}

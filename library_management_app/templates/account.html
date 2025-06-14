@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<div class="account">
+    <h2>Account Information</h2>
+    
+    <div class="name">
+        <label>Name:</label>
+        <p>{{ user_name }}</p>
+    </div>
+    
+    <div class="email">
+        <label>Email:</label>
+        <p>{{ user_email }}</p>
+    </div>
+    
+    <div class="type">
+        <label>Account Type:</label>
+        <p>{{ user_type.title() }}</p>
+    </div>
+    
+    <div>
+        {% if user_type == 'librarian' %}
+            <a href="{{ url_for('librarian_dashboard') }}"><button>Back to Dashboard</button></a>
+        {% else %}
+            <a href="{{ url_for('client_dashboard') }}"><button>Back to Dashboard</button></a>
+        {% endif %}
+    </div>
+</div>
+<style>
+    .account {
+        text-align: center;
+    }
+</style>
+{% endblock %}

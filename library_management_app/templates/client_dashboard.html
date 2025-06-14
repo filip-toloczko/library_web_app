@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Client Dashboard{% endblock %}
+
+{% block content %}
+<div class="client-dashboard">
+    <h2>Welcome, {{ user_name }}!</h2>
+    
+    <div class="grid">
+        <div class="card">
+            <h3>Search Books</h3>
+            <a href="{{ url_for('search') }}"><button>Search Documents</button></a>
+        </div>
+        
+        <div class="card">
+            <h3>My Account</h3>
+            <a href="{{ url_for('account') }}"><button>View Account</button></a>
+        </div>
+    </div>
+</div>
+<style> 
+    .client-dashboard {
+        text-align: center;
+    }
+</style>
+{% endblock %}

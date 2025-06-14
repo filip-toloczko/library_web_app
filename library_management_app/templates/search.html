@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Search Documents{% endblock %}
+
+{% block content %}
+<div class="search">
+    <h2>Document Search</h2>
+
+</div>
+
+
+
+{% if documents %}
+<table>
+    <thead>
+        <tr>
+            <th>Barcode</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Year</th>
+            <th>Publisher</th>
+            <th>Copies Available</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for doc in documents %}
+        <tr>
+            <td>{{ doc[0] }}</td>
+            <td>
+                {% if doc[9] %}
+                    {{ doc[9] }}
+                {% elif doc[4] %}
+                    {{ doc[4] }}
+                {% elif doc[12] %}
+                    {{ doc[12] }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if doc[10] %}
+                    {{ doc[10] }}
+                {% elif doc[7] %}
+                    {{ doc[7] }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>{{ doc[1] }}</td>
+            <td>{{ doc[2] }}</td>
+            <td>{{ doc[3] }}</td>
+            <td>
+                {% if doc[9] %}
+                    Book
+                {% elif doc[4] %}
+                    Journal
+                {% elif doc[12] %}
+                    Magazine
+                {% else %}
+                    Document
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="search">
+    <p>No documents found in the database.</p>
+</div>
+{% endif %}
+
+<style> 
+    .search {
+        text-align: center;
+    }
+
+</style>
+
+{% endblock %}

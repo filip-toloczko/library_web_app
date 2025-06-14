@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Chicago Public Library{% endblock %}</title>
+  <style>
+    body {
+      font-family: "Stencil Std", fantasy;
+      background-image: url("{{ url_for('static', filename='books_bg.jpg') }}");
+      color: #0c5460;
+      margin: 0;
+    }
+
+    button {
+        background-color: #0c5460;
+        color: white;
+        cursor: pointer;
+    }
+
+    .wrapper {
+      max-width: 960px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    header {
+      background: #d79054;
+      color: #474f5b;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .msg {
+      padding: 0.75rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .msg.success { background: #70c383; color: #155724; }
+    .msg.error { background: #e7636e; color: #721c24; }
+    .msg.info { background: #c6c6c6; color: #0c5460; }
+
+    .content {
+      background: #d79054;
+      padding: 2rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    nav {
+      background: #0c5460;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: #d79054;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <a href="{{ url_for('index') }}" style="color: #0c5460">
+        Public Library
+      </a>
+    </h1>
+  </header>
+
+  {% if session.user_email %}
+  <nav>
+    <ul>
+      {% if session.user_type == 'librarian' %}
+        <li><a href="{{ url_for('librarian_dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('add_book_route') }}">Add Book</a></li>
+      {% else %}
+        <li><a href="{{ url_for('client_dashboard') }}">Dashboard</a></li>
+      {% endif %}
+      <li><a href="{{ url_for('search') }}">Search</a></li>
+      <li><a href="{{ url_for('account') }}">Account</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+  </nav>
+  {% endif %}
+
+  <div class="wrapper">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="msg {{ 'error' if category == 'error' else category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+</body>
+</html>

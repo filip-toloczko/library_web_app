@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="home">
+    <h2>Please log in or create a new account.</h2>
+    
+    <div class="button-grid" style="max-width: 300px; margin: 2rem auto;">
+        <a href="{{ url_for('login') }}"><button>Login</button></a>
+        <a href="{{ url_for('register') }}"><button>Register</button></a>
+    </div>
+</div>
+<style>
+    .home {
+        text-align: center;
+    }
+    
+</style>
+{% endblock %}
